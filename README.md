@@ -6,7 +6,7 @@ You can build a LAN system by converting the UART of Raspberry Pi Pico to RS485 
 
 ## Demo
 This is a program that reads received data.   
-format: `STX` 'ADDRESS(00~10)' `DATA_LEN` `DATA(10Byte)` `ETX`
+format: `STX` `ADDRESS(00~10)` `DATA_LEN` `DATA(10Byte)` `ETX`
 ```python:demo.py
 from machine import UART, Pin
 import PicoLAN
