@@ -117,7 +117,7 @@ class PicoLAN:
             send_data += sep
         send_data = send_data[1:]
         if len(send_data) <= self.__DATA_MAX:
-            format_str = "{: <" + str(self.__ADDR_LEN) + "}"
+            format_str = "{: <" + str(self.__DATA_LEN) + "}"
             send_data = self.__STX + self.__ADDR + format_str.format(send_data).encode("UTF-8") + self.__ETX
             self.uart.write(send_data)
 
