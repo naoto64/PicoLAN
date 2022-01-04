@@ -5,7 +5,7 @@ This is a LAN system library using UART on Raspberry Pi Pico.
 You can build a LAN system by converting the UART of Raspberry Pi Pico to RS485 and connecting them in parallel.
 
 ## Demo
-This is a program that reads received data.
+This is a program that reads received data.   
 format: `STX` 'ADDRESS(00~10)' `DATA_LEN` `DATA(10Byte)` `ETX`
 ```python:demo.py
 from machine import UART, Pin
