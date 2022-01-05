@@ -24,7 +24,7 @@ while True:
 ```
 
 ### Transmission example
-This is an example of sending dictionary format data.
+This is an example of sending dictionary format data.   
 Transmission format: `STX` `ADDRESS(00~10)` `DATA_LEN` `DATA(10Byte)` `ETX`
 ```python:demo2.py
 from machine import UART, Pin
