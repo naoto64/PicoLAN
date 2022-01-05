@@ -114,16 +114,18 @@ class PicoLAN:
     def send(self, data, addr, sep=" ", arg_sep="="):
         send_data = sep
         for key in data:
-            send_data += key
+            send_data += str(key)
             if data[key] is not None:
-                send_data += arg_sep + data
+                send_data += arg_sep + str(data[key])
             send_data += sep
         send_data = send_data[1:]
         if len(send_data) <= self.__DATA_LEN:
+            data_len_format = ("{:0>" + str(self.__DATA_LEN_AREA) + "}").format(self.__DATA_LEN).encode("UTF-8")
             if self.__DATA_LEN_MODE == DATA_LEN_FIXED:
-                send_data = self.__STX + self.__ADDR + send_data.ljust(self.__DATA_LEN_AREA).encode("UTF-8") + self.__ETX
+                format_data = ("{:>" + str(self.__DATA_LEN) + "}").format(send_data)
+                send_data = self.__STX + self.__ADDR + data_len_format + format_data.encode("UTF-8") + self.__ETX
             else:
-                send_data = self.__STX + self.__ADDR + send_data.encode("UTF-8") + self.__ETX
+                send_data = self.__STX + self.__ADDR + data_len_format + send_data.encode("UTF-8") + self.__ETX
             self.uart.write(send_data)
 
     def __read_reset(self):
