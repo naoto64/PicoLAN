@@ -91,7 +91,7 @@ class PicoLAN:
                 if self.__read_count < self.__ADDR_LEN + self.__DATA_LEN_AREA + 1:
                     data_len_count = self.__read_count - self.__ADDR_LEN - 2
                     data_len_format = ("{:0>" + str(self.__DATA_LEN_AREA) + "}").format(self.__DATA_LEN).encode("UTF-8")
-                    if read_data[0] != data_len_format[data_len_count]:
+                    if self.__DATA_LEN_MODE == DATA_LEN_FIXED and read_data[0] != data_len_format[data_len_count]:
                         self.__read_reset()
                 else:
                     self.__read_state = self.__WAIT_ETX
