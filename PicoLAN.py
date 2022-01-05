@@ -58,7 +58,7 @@ class PicoLAN:
             self.__DATA_LEN_AREA = 4
         else:
             raise ValueError("The value of \"data_len\" is too large.")
-        
+
         self.__DATA_LEN = data_len
 
         if data_len_mode != DATA_LEN_FIXED and data_len_mode != DATA_LEN_VARIABLE:
@@ -89,7 +89,10 @@ class PicoLAN:
                     self.__read_reset()
             elif self.__read_state == self.__WAIT_SIZE:
                 if self.__read_count < self.__ADDR_LEN + self.__DATA_LEN_AREA + 1:
-                    pass
+                    data_len_count = self.__read_count - self.__ADDR_LEN - 2
+                    data_len_format = ("{:0>" + str(self.__DATA_LEN_AREA) + "}").format(self.__DATA_LEN).encode("UTF-8")
+                    if read_data[0] != data_len_format[data_len_count]:
+                        self.__read_reset()
                 else:
                     self.__read_state = self.__WAIT_ETX
             elif self.__read_state == self.__WAIT_ETX:
